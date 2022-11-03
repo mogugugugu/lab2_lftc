@@ -7,13 +7,13 @@ import java.util.*;
 
 public class Main {
 
-    public static int checkINT(String s) {
+    public static boolean checkINT(String s) {
 
         try {
             Integer.parseInt(s);
-            return 1;
+            return true;
         } catch (NumberFormatException e) {
-            return -1;
+            return false;
         }
     } // function to check if values are an integer
 
@@ -112,7 +112,7 @@ public class Main {
                 String[] splitted = line.split(" ");
 
                 for (String s : splitted) {
-                    if (checkINT(s) == 1) {
+                    if (checkINT(s)) {
                         if (!(map.containsKey(s))) {
                             if(!(symbolMap.containsKey(s))) {
                                 symbolMap.put(s, n);
@@ -127,12 +127,12 @@ public class Main {
                             }
                         }
                     }
-                    if (checkRESWORD(s) || checkOPERATOR(s) || checkSEPARATOR(s) || checkIDENTIFIER(s) || checkSEPARATOR(s)) {
+                    if (checkRESWORD(s) || checkOPERATOR(s) || checkSEPARATOR(s) || checkIDENTIFIER(s) || checkSEPARATOR(s) || checkINT(s)) {
                         List<Integer> maps = new ArrayList<>();
                         maps.add(symbolMap.get(s) == null ? -1 : symbolMap.get(s));
                         if((checkIDENTIFIER(s)) && checkRESWORD(s)==false){
                             maps.add(0);
-                        } else if ((checkINT(s) == 1)){
+                        } else if ((checkINT(s))){
                             maps.add(1);
                         } else {
                             maps.add(map.get(s));
